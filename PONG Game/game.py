@@ -25,7 +25,7 @@ class Game ( arcade.Window ) :
 
         text = f"{self.opponent.score}  :  {self.player.score}"
         arcade.draw_text ( text , (self.width // 2) - 68 , self.height - 60 , arcade.color.LIGHT_GREEN , 40 )
-        
+
         arcade.finish_render ()
 
     
@@ -48,6 +48,7 @@ class Game ( arcade.Window ) :
 
         if arcade.check_for_collision ( self.ball , self.player) or arcade.check_for_collision ( self.ball , self.opponent ):
             self.ball.change_x *= -1 
+            self.ball.speed += 0.1
 
         if self.ball.center_x > self.width - 25 :
             self.opponent.score += 1
