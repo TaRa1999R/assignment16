@@ -11,11 +11,11 @@ class Brik ( arcade.Sprite ) :
         self.center_y = game.height - 70
         self.change_x = 0
         self.change_y = 0
-        self.coler_list = [ arcade.color.MEDIUM_PURPLE ]
-                        # arcade.color.GREEN , arcade.color.LAVENDER , arcade.color.LIGHT_CYAN , arcade.color.YELLOW , arcade.color.RED ]
+        self.coler_list = [ arcade.color.CYAN , arcade.color.DARK_VIOLET , arcade.color.RED , arcade.color.DARK_ORANGE , arcade.color.YELLOW , arcade.color.GREEN ]
 
-    def draw ( self ) :
+    def draw ( self , height) :
         for color in self.coler_list :
             arcade.draw_rectangle_filled ( self.center_x , self.center_y , self.width , self.height , color )
-            # self.center_y -= 25
-            # print ( self.center_y )
+            self.center_y -= 25
+        self.center_y = height - 70
+            
