@@ -99,6 +99,9 @@ class Game ( arcade.Window ) :
         if arcade.check_for_collision ( self.ball , self.racket ) :
             self.ball.change_y *= -1
 
+        # if arcade.check_for_collision_with_list ( self.ball , self.brik_list ) : ??????????????????? شرط برخورد با آجر ها
+        #     print ("yes")
+
         if self.ball.center_y < 25 :
             self.racket.score -= 1 
             self.life_list.pop ()
