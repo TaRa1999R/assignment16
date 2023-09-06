@@ -12,6 +12,7 @@ class Racket ( arcade.Sprite ) :
         self.change_x = 0
         self.change_y = 0
         self.speed = 3
+        self.score = 0
 
     
     def move ( self , width) :
