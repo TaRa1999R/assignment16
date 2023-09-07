@@ -17,12 +17,18 @@ class Game ( arcade.Window ) :
         self.racket = Racket ( self)
         self.ball = Ball ( self.racket )
         self.ball_mode = "stay"
+        self.color = [ arcade.color.GREEN , arcade.color.YELLOW , arcade.color.DARK_ORANGE , arcade.color.RED , arcade.color.DARK_VIOLET , arcade.color.CYAN ]
         self.brik_list = []
         self.life_list = []
 
-        for i in range ( 34 , self.width - 33 , 48 ) :
-            new_brik = Brik ( self , i )
-            self.brik_list.append ( new_brik )
+        for x in range ( 34 , self.width - 33 , 48 ) :
+            i = 0
+            for y in range ( self.height - 195 , self.height - 55 , 25 ) :
+                color = self.color [i]
+                new_brik = Brik ( x , y , color )
+                self.brik_list.append ( new_brik )
+                i += 1
+                
 
         for i in range ( self.width - 20 , self.width - 80 , -25 ) :
             new_life = life ( i , self.height )
@@ -53,7 +59,7 @@ class Game ( arcade.Window ) :
             self.ball.draw ()
             
             for brik in self.brik_list :
-                brik.draw ( self.height )
+                brik.draw ()
 
             for life in self.life_list :
                 life.draw ()
@@ -65,9 +71,6 @@ class Game ( arcade.Window ) :
 
     def on_mouse_motion ( self , x , y , dx , dy ) :
         self.racket.center_x = x
-        if self.ball_mode == "stay" :
-            self.ball.center_x = x
-
 
     def on_key_press ( self , symbol , modifiers ) :
         if symbol == arcade.key.RIGHT :
@@ -90,6 +93,9 @@ class Game ( arcade.Window ) :
         self.racket.move ( self.width )
         self.ball.move ( self.width  , self.ball_mode )
 
+        if self.ball_mode == "stay" :
+            self.ball.center_x = self.racket.center_x
+
         if self.ball.center_x < 15 or self.ball.center_x > self.width - 15 :
             self.ball.change_x *= -1
 
@@ -101,14 +107,17 @@ class Game ( arcade.Window ) :
 
         for brik in self.brik_list :
             if arcade.check_for_collision ( self.ball , brik ) :
-                brik.color_list.pop (0)
+                self.brik_list.remove ( brik )
                 self.racket.score += 1
-                self.ball.change_y *= -1
-                self.ball.speed += 0.05
-                if len ( brik.color_list ) == 0 :
-                    self.brik_list.remove ( brik )
+                self.ball.speed += 0.1
+                self.racket.speed += 0.05
+                
+                if self.ball.center_y -20 < brik.center_y < self.ball.center_y + 20 :
+                    self.ball.change_y *= -1
+                
+                if self.ball.center_x - 30 < brik.center_x < self.ball.center_x + 30 :
+                    self.ball.change_x *= -1
 
-        
         if self.ball.center_y < 25 :
             self.racket.score -= 1 
             self.life_list.pop ()
