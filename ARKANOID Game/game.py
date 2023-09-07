@@ -101,13 +101,12 @@ class Game ( arcade.Window ) :
 
         for brik in self.brik_list :
             if arcade.check_for_collision ( self.ball , brik ) :
-                if brik.center_y - 20 < self.ball.center_y < brik.center_y + 20 :
-                    self.ball.change_y *= -1
-                
-                if brik.center_x - 30 < self.ball.center_x < brik.center_y + 30 :
-                    self.ball.change_x *= -1
-
-                
+                brik.color_list.pop (0)
+                self.racket.score += 1
+                self.ball.change_y *= -1
+                self.ball.speed += 0.05
+                if len ( brik.color_list ) == 0 :
+                    self.brik_list.remove ( brik )
 
         
         if self.ball.center_y < 25 :
@@ -115,6 +114,7 @@ class Game ( arcade.Window ) :
             self.life_list.pop ()
             del self.ball
             self.ball = Ball ( self.racket )
+            self.ball_mode = "stay"
 
         if len ( self.life_list ) == 0 :
             self.mode = "game_over"
