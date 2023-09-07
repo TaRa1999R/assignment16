@@ -23,7 +23,7 @@ class Game ( arcade.Window ) :
 
         for x in range ( 34 , self.width - 33 , 48 ) :
             i = 0
-            for y in range ( self.height - 195 , self.height - 55 , 25 ) :
+            for y in range ( self.height - 220 , self.height - 75 , 25 ) :
                 color = self.color [i]
                 new_brik = Brik ( x , y , color )
                 self.brik_list.append ( new_brik )
