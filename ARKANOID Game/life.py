@@ -1,7 +1,7 @@
 
 import arcade
 
-class life ( arcade.Sprite ) :
+class Life ( arcade.Sprite ) :
 
     def __init__ ( self , width , height) :
         super().__init__("ARKANOID Game/images/heart.png")

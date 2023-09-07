@@ -4,7 +4,7 @@ import arcade
 from brik import Brik
 from racket import Racket
 from ball import Ball
-from life import life
+from life import Life
 
 class Game ( arcade.Window ) :
 
@@ -31,7 +31,7 @@ class Game ( arcade.Window ) :
                 
 
         for i in range ( self.width - 20 , self.width - 80 , -25 ) :
-            new_life = life ( i , self.height )
+            new_life = Life ( i , self.height )
             self.life_list.append ( new_life )
 
 
